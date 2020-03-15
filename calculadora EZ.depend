@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1583335699 source:c:\users\leo\desktop\calculadora ez\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<ctype.h>
+
