@@ -3,73 +3,32 @@
 #include <math.h>
 #include <ctype.h>
 
-//float funcaoRecebeK();
-//float funcaoRecebeX();
-//float funcaoIntegralDefinidaA();
-//float funcaoIntegralDefinidaB();
-double funcaoRecebeX()
-{
+/* Prototipos Auxiliares */
+void menuPrincipal();
+void quebraLinha();
+void funcaoConstante();
 
-}
+/* Prototipos Calculos */
+double funcaoRecebeK();
+double funcaoRecebeX();
+double validaInput();
+float funcaoIntegralDefinidaA();
+float funcaoIntegralDefinidaB();
+void funcaoXElevadoAK();
+void calculaFuncaoConstante();
+void calculaDerivadaConstante();
+void calculaIntegralDefinidaConstante();
+void calculaFuncaoXElevadoAK();
+void calculaDerivadaXElevadoAK();
 
-double validaInput()
-{
-   char buf[40];
-   char *endPt;
-   double x;
-   fflush(stdin); //usado para limpar buffer de input no caso quando usa scanf
-   printf("entre com um valor: ");
-   fgets(buf, sizeof(buf), stdin);
-   buf[strlen(buf)-1] = '\0' ;
-   x = strtod(buf, &endPt);
-    if (*endPt != '\0' || strlen(buf)==0 )
-        {
-            printf("numero invalido\n");
-        }
-    else
-        {
-            printf("numero valido\n");
-        }
-   return x;
-}
-
-
-double funcaoRecebeK()
-{
-  double k;
-  printf("qual valor de k deseja aplicar? ");
-  scanf("%lf", &k);
-  quebraLinha();
-  return k;
-}
-
-float funcaoIntegralDefinidaA()
-{
-  float a;
-  printf("qual valor do extremo a deseja aplicar? ");
-  scanf("%f", &a);
-  quebraLinha();
-  return a;
-}
-
-float funcaoIntegralDefinidaB()
-{
-  float b;
-  printf("qual valor do extremo b deseja aplicar? ");
-  scanf("%f", &b);
-  quebraLinha();
-  return b;
-}
-
-int main()
-{
+int main(){
     menuPrincipal();
 }
 
-void menuPrincipal()
-{
-int menuPrincipal;
-    do{
+void menuPrincipal(){
+    int menuPrincipal;
+
+    do {
         quebraLinha();
         printf("\n        MENU\n\n");
         printf("\n  Digite o numero da opcao e aperte enter para selecionar o calculo a ser feito\n\n");
@@ -86,11 +45,10 @@ int menuPrincipal;
         printf("\n11.	SAIR; \n\n");
         quebraLinha();
 
+        scanf("%d", & menuPrincipal);
 
-        scanf("%d", &menuPrincipal);
-
-        switch(menuPrincipal)
-        {case 1:
+        switch (menuPrincipal) {
+            case 1:
                 funcaoConstante();
                 break;
 
@@ -138,16 +96,84 @@ int menuPrincipal;
                 printf("Opcao invalida \n");
                 break;
         }
-    }while(menuPrincipal !=11);
+    } while (menuPrincipal != 11);
 
     return 0;
 }
 
-void funcaoConstante()
-{int funcaoConstante;
+void quebraLinha(){
+    printf("================================================================================ \n\n");
+}
 
-    do{
+double funcaoRecebeK(){
+    double k;
+    printf("qual valor de k deseja aplicar? ");
+    scanf("%lf", & k);
+    quebraLinha();
+    return k;
+}
 
+double funcaoRecebeX(){
+
+}
+
+double validaInput(){
+    char buf[40];
+    char * endPt;
+    double x;
+    fflush(stdin); //usado para limpar buffer de input no caso quando usa scanf
+    printf("entre com um valor: ");
+    fgets(buf, sizeof(buf), stdin);
+    buf[strlen(buf) - 1] = '\0';
+    x = strtod(buf, & endPt);
+    if (* endPt != '\0' || strlen(buf) == 0)
+        printf("numero invalido\n");
+    else
+        printf("numero valido\n");
+    return x;
+}
+
+void calculaFuncaoConstante(){
+    double k = funcaoRecebeK();
+    double x = validaInput();
+    printf("f(%lf) = %lf \n", x, k);
+    quebraLinha();
+}
+
+void calculaDerivadaConstante(){
+    float k = funcaoRecebeK();
+    float x = funcaoRecebeX();
+    printf(" f'(%f) = 0 \n", x);
+    quebraLinha();
+}
+
+void calculaIntegralDefinidaConstante(){
+    float k = funcaoRecebeK();
+    float x = funcaoRecebeX();
+    float a = funcaoIntegralDefinidaA();
+    float b = funcaoIntegralDefinidaB();
+    printf(" I(%f,%f) = por o resultado \n", a, b);
+    quebraLinha();
+}
+
+void calculaFuncaoXElevadoAK(){
+    float k = funcaoRecebeK();
+    float x = funcaoRecebeX();
+    printf("f(%f) = %lf \n", x, pow(x, k));
+    quebraLinha();
+}
+
+void calculaDerivadaXElevadoAK(){
+    float k = funcaoRecebeK();
+    float x = funcaoRecebeX();
+    float xk;
+    printf(" f'(%f) = %lf \n", x, xk);
+    quebraLinha();
+}
+
+void funcaoConstante(){
+    int funcaoConstante;
+    do {
         quebraLinha();
         printf("\n        MENU\n\n");
         printf("\n  f(x) = k\n");
@@ -158,39 +184,32 @@ void funcaoConstante()
         printf("\n4.	VOLTAR AO MENU PRINCIPAL; \n\n");
         quebraLinha();
 
-        scanf("%d", &funcaoConstante);
+        scanf("%d", & funcaoConstante);
         quebraLinha();
 
-        switch(funcaoConstante)
-        {case 1:
+        switch (funcaoConstante) {
+            case 1:
                 calculaFuncaoConstante();
                 break;
-
             case 2:
                 calculaDerivadaConstante();
                 break;
-
             case 3:
                 calculaIntegralDefinidaConstante();
                 break;
-
             case 4:
                 break;
-
             default:
                 printf("Opcao invalida \n");
                 break;
         }
-
-    }while(funcaoConstante !=4);
-
+    } while (funcaoConstante != 4);
 }
 
-void funcaoXElevadoAK()
-{int funcaoXElevadoAK;
+void funcaoXElevadoAK(){
+    int funcaoXElevadoAK;
 
-    do{
-
+    do {
         quebraLinha();
         printf("\n        MENU\n\n");
         printf("\n  f(x) = x^k\n");
@@ -201,78 +220,40 @@ void funcaoXElevadoAK()
         printf("\n4.	VOLTAR AO MENU PRINCIPAL; \n\n");
         quebraLinha();
 
-        scanf("%d", &funcaoXElevadoAK);
+        scanf("%d", & funcaoXElevadoAK);
         quebraLinha();
 
-        switch(funcaoXElevadoAK)
-        {case 1:
+        switch (funcaoXElevadoAK) {
+            case 1:
                 calculaFuncaoXElevadoAK();
                 break;
-
             case 2:
                 calculaDerivadaXElevadoAK();
                 break;
-
             case 3:
                 //calculaIntegralDefinidaXElevadoAK();
                 break;
-
             case 4:
                 break;
-
             default:
                 printf("Opcao invalida \n");
                 break;
         }
-
-    }while(funcaoXElevadoAK !=4);
-
+    } while (funcaoXElevadoAK != 4);
 }
 
-void quebraLinha()
-{
-    printf("================================================================================ \n\n");
+float funcaoIntegralDefinidaA(){
+    float a;
+    printf("qual valor do extremo a deseja aplicar? ");
+    scanf("%f", & a);
+    quebraLinha();
+    return a;
 }
 
-void calculaFuncaoConstante()
-{
-  double k = funcaoRecebeK();
-  double x = validaInput();
-  printf("f(%lf) = %lf \n", x, k);
-  quebraLinha();
-}
-
-void calculaDerivadaConstante()
-{
-  float k = funcaoRecebeK();
-  float x = funcaoRecebeX();
-  printf(" f'(%f) = 0 \n", x);
-  quebraLinha();
-}
-
-void calculaIntegralDefinidaConstante()
-{
-  float k = funcaoRecebeK();
-  float x = funcaoRecebeX();
-  float a = funcaoIntegralDefinidaA();
-  float b = funcaoIntegralDefinidaB();
-  printf(" I(%f,%f) = por o resultado \n", a, b);
-  quebraLinha();
-}
-
-void calculaFuncaoXElevadoAK()
-{
-  float k = funcaoRecebeK();
-  float x = funcaoRecebeX();
-  printf("f(%f) = %lf \n", x, pow(x, k));
-  quebraLinha();
-}
-
-void calculaDerivadaXElevadoAK()
-{
-  float k = funcaoRecebeK();
-  float x = funcaoRecebeX();
-  float xk;
-  printf(" f'(%f) = %lf \n", x, xk);
-  quebraLinha();
+float funcaoIntegralDefinidaB(){
+    float b;
+    printf("qual valor do extremo b deseja aplicar? ");
+    scanf("%f", & b);
+    quebraLinha();
+    return b;
 }
