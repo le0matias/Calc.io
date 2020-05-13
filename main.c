@@ -74,6 +74,7 @@ void menuPrincipal()
 
 
         scanf("%d", & menuPrincipal);
+        fflush(stdin);
 
         switch (menuPrincipal) {
             case 1:
@@ -142,6 +143,8 @@ int menuSecundario()
 
     scanf("%d", & escolha);
     quebraLinha();
+
+    fflush(stdin);
 
     return escolha;
 }
