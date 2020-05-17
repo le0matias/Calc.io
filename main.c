@@ -45,6 +45,7 @@ void calculaTgX();
 void derivadaTgX();
 double grausParaRadianos(double d);
 double logbase(double a, double base);
+int validaTg(double tg);
 
 int main()
 {
@@ -610,20 +611,34 @@ void calculaDerivadaXElevadoAK()
 void calculaFuncaoKElevadoAX()
 {
     float k = funcaoRecebeK();
-    float x = funcaoRecebeX();
-    printf("f(%f) = %lf \n", x, pow(k, x));
+    if(k >= 0){
+        float x = funcaoRecebeX();
+        printf("f(%f) = %lf \n", x, pow(k, x));
+    } else {
+        printf("Valor de k invalido\n");
+        calculaFuncaoKElevadoAX();
+    }
     quebraLinha();
+    system("PAUSE");
+    system("cls");
 }
 
 void calculaDerivadaKElevadoAX()
 {
     float k = funcaoRecebeK();
-    float x = funcaoRecebeX();
-    float result = 0;
-    printf("%f\n", pow(k, x));
-    printf("%f\n", log((double)k));
-    result = pow(k, x) * log((double)k);
-    printf(" f'(%f) = %lf \n", x, result);
+    if(k >= 0){
+        float x = funcaoRecebeX();
+        float result = 0;
+        printf("%f\n", pow(k, x));
+        printf("%f\n", log((double)k));
+        result = pow(k, x) * log((double)k);
+        printf(" f'(%f) = %lf \n", x, result);
+    } else {
+        printf("Valor de k invalido\n");
+        calculaDerivadaKElevadoAX();
+        system("PAUSE");
+        system("cls");
+    }
     quebraLinha();
 }
 
@@ -636,19 +651,29 @@ double logbase(double a, double base)
 void calculaLogDeX(){
     double k = funcaoRecebeK();
     double x = funcaoRecebeX();
-    double result = 0;
-    result = logbase(x, k);
-    printf(" f'(%f) = %lf \n", x, result);
-    quebraLinha();
+    if((k >= 0) && (x >= 0)){
+       double result = 0;
+        result = logbase(x, k);
+        printf(" f'(%f) = %lf \n", x, result);
+        quebraLinha();
+    } else {
+        printf("Valores providos sao invalidos, tente novamente \n\n");
+        calculaLogDeX();
+    }
 }
 
 void calculaDerivadaLogX(){
     double k = funcaoRecebeK();
     double x = funcaoRecebeX();
-    double result = 0;
-    result = 1 / (x * log(k));
-    printf(" f'(%f) = %lf \n", x, result);
-    quebraLinha();
+    if((k >= 0) && (x >= 0)){
+        double result = 0;
+        result = 1 / (x * log(k));
+        printf(" f'(%f) = %lf \n", x, result);
+        quebraLinha();
+    } else {
+        printf("Valores providos sao invalidos, tente novamente \n\n");
+        calculaDerivadaLogX();
+    }
 }
 
 //e ELEVADO A X
@@ -683,10 +708,15 @@ void derivadaLnX(){
 
 void calculaUmSobreX(){
     double x = funcaoRecebeX();
-    double result = 0;
-    result = 1 / x;
-    printf(" f'(%f) = %lf \n", x, result);
-    quebraLinha();
+    if(x != 0){
+        double result = 0;
+        result = 1 / x;
+        printf(" f'(%f) = %lf \n", x, result);
+        quebraLinha();
+    } else {
+        printf("Valor de x invalido, tente novamente \n\n");
+        calculaUmSobreX();
+    }
 }
 
 void derivadaUmSobreX(){
@@ -729,10 +759,15 @@ void derivadaCosX(){
 
 void calculaTgX(){
     double x = funcaoRecebeX();
-    double result = 0;
-    result = tan(grausParaRadianos(x));
-    printf(" f'(%f) = %lf \n", x, result);
-    quebraLinha();
+    if(validaTg(x)){
+        double result = 0;
+        result = tan(grausParaRadianos(x));
+        printf(" f'(%f) = %lf \n", x, result);
+        quebraLinha();
+    } else {
+        printf("Valor de x invalido, tente novamente \n\n");
+        calculaTgX();
+    }
 }
 
 void derivadaTgX(){
@@ -742,6 +777,16 @@ void derivadaTgX(){
     printf(" f'(%f) = %lf \n", x, result);
     quebraLinha();
 }
+
+int validaTg(double tg){
+    int q = tg / 90;
+    if(q % 2 == 0){
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 
 
 
