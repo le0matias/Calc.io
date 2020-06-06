@@ -39,13 +39,14 @@ void calculaSenX();
 void derivadaSenx();
 void cosX();
 void calculaCosX();
-void derivadaSenxOuCosX();
+void derivadaCosX();
 void tgX();
 void calculaTgX();
 void derivadaTgX();
 double grausParaRadianos(double d);
 double logbase(double a, double base);
-int validaTg(double tg);
+int validaTgRad(double tg);
+int validaTgGraus(double tg);
 void pauseAndClear();
 
 int main()
@@ -471,7 +472,7 @@ void senX(){
                 calculaSenX();
                 break;
             case 2:
-                derivadaSenxOuCosX();
+                derivadaSenx();
                 break;
 
             case 3:
@@ -502,7 +503,7 @@ void cosX(){
 
         switch (escolha) {
             case 1:
-                derivadaSenxOuCosX();
+                calculaCosX();
                 break;
             case 2:
                 derivadaCosX();
@@ -749,7 +750,17 @@ void calculaSenX(){
     pauseAndClear();
 }
 
-void derivadaSenxOuCosX(){
+void derivadaSenx(){
+    double x = funcaoRecebeX();
+    double result = 0;
+    result = cos(x);
+    printf(" f(%f) = %lf \n", x, result);
+    pauseAndClear();
+}
+
+//COS(X)
+
+void calculaCosX() {
     double x = funcaoRecebeX();
     double result = 0;
     result = cos(grausParaRadianos(x));
@@ -757,12 +768,10 @@ void derivadaSenxOuCosX(){
     pauseAndClear();
 }
 
-//COS(X)
-
 void derivadaCosX(){
     double x = funcaoRecebeX();
     double result = 0;
-    result = -sin(grausParaRadianos(x));
+    result = -sin(x);
     printf(" f'(%f) = %lf \n", x, result);
     pauseAndClear();
 }
@@ -771,7 +780,7 @@ void derivadaCosX(){
 
 void calculaTgX(){
     double x = funcaoRecebeX();
-    if(validaTg(x)){
+    if(validaTgGraus(x)){
         double result = 0;
         result = tan(grausParaRadianos(x));
         printf(" f(%f) = %lf \n", x, result);
@@ -784,9 +793,9 @@ void calculaTgX(){
 
 void derivadaTgX(){
     double x = funcaoRecebeX();
-    if(validaTg(x)){
+    if(validaTgRad(x)){
         double result = 0;
-        result = pow(1 / cos(grausParaRadianos(x)), 2);
+        result = pow(1 / cos(x), 2);
         printf(" f'(%f) = %lf \n", x, result);
         pauseAndClear();
     } else {
@@ -795,8 +804,17 @@ void derivadaTgX(){
     }
 }
 
-int validaTg(double tg){
-    int q = tg / 90;
+int validaTgRad(double tg){
+    for(int i = 0; i <= tg; i++){
+        if((PI/2 + PI * (double)i) == tg){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int validaTgGraus(double tg){
+    int q = tg /90;
     if(q % 2 == 0){
         return 1;
     } else {
