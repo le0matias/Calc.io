@@ -86,8 +86,15 @@ void menuPrincipal()
 
     do {
         quebraLinha();
-        printf("\t CALC.IO");
-        printf("\n        MENU\n\n");
+
+        printf("    ____           _              _ \n");
+        printf("   / ___|   __ _  | |   ___      (_)   ___  \n");
+        printf("  | |      / _` | | |  / __|     | |  / _ \\ \n");
+        printf("  | |___  | (_| | | | | (__   _  | | | (_) | \n");
+        printf("   \\____|  \\__,_| |_|  \\___| (_) |_|  \\___/  \n");
+
+
+        printf("\n\t\t\tMENU\n\n");
         printf("\n  Digite o numero da opcao e aperte enter para selecionar o calculo a ser feito\n\n");
         printf("\n1.	f(x) = k;");
         printf("\n2.	f(x) = x^k;");
@@ -921,15 +928,7 @@ void integralTgX(){
     float a = funcaoRecebeValue('a');
     float b = funcaoRecebeValue('b');
     if(validaIntegralTg(a, b)){
-        double cosa = cos(a);
-        double cosb = cos(b);
-        if(cos(a) < 0){
-            cosa = -cos(a);
-        }
-        if(cos(b) < 0){
-            cosb = -cos(b);
-        }
-        double result = (log(cosa)) - (log(cosb));
+        double result = (-log(fabs(cos(a)))) - (-log(fabs(cos(b))));
         printf(" I(%.2f,%.2f) = %f \n", a, b, result);
         pauseAndClear();
     } else {
