@@ -2,64 +2,78 @@
 #include <stdlib.h>
 #include <math.h>
 #include <ctype.h>
+#define E 2.718281
+#define PI 3.14159265359
 
-//float funcaoRecebeK();
-//float funcaoRecebeX();
-//float funcaoIntegralDefinidaA();
-//float funcaoIntegralDefinidaB();
-double funcaoRecebeX()
-{
+/* Prototipos Auxiliares */
+void menuPrincipal();
+void quebraLinha();
+void funcaoConstante();
 
-}
+/* Prototipos Calculos */
+double validaInput();
+float funcaoIntegralDefinidaA();
+float funcaoIntegralDefinidaB();
+void funcaoXElevadoAK();
 
-double validaInput()
-{
-   char buf[40];
-   char *endPt;
-   double x;
-   fflush(stdin); //usado para limpar buffer de input no caso quando usa scanf
-   printf("entre com um valor: ");
-   fgets(buf, sizeof(buf), stdin);
-   buf[strlen(buf)-1] = '\0' ;
-   x = strtod(buf, &endPt);
-    if (*endPt != '\0' || strlen(buf)==0 )
-        {
-            printf("numero invalido\n");
-        }
-    else
-        {
-            printf("numero valido\n");
-        }
-   return x;
-}
+void calculaFuncaoConstante();
+void calculaDerivadaConstante();
+void calculaIntegralConstante();
+
+void calculaFuncaoXElevadoAK();
+void calculaDerivadaXElevadoAK();
+void calculaIntegralXElevadoAK();
+
+void funcaoKElevadoAX();
+void calculaFuncaoKElevadoAX();
+void calculaDerivadaKElevadoAX();
+void calculaIntegralKElevadoAX();
 
 
-double funcaoRecebeK()
-{
-  double k;
-  printf("qual valor de k deseja aplicar? ");
-  scanf("%lf", &k);
-  quebraLinha();
-  return k;
-}
+void eElevadoAX();
+void calcula_e_ElevadoAX();
+void derivada_e_ElevadoAX();
+void calculaIntegral_e_ElevadoAX();
 
-float funcaoIntegralDefinidaA()
-{
-  float a;
-  printf("qual valor do extremo a deseja aplicar? ");
-  scanf("%f", &a);
-  quebraLinha();
-  return a;
-}
+void logXBaseK();
+void calculaLogDeX();
+void calculaDerivadaLogX();
+void calculaIntegralLogX();
 
-float funcaoIntegralDefinidaB()
-{
-  float b;
-  printf("qual valor do extremo b deseja aplicar? ");
-  scanf("%f", &b);
-  quebraLinha();
-  return b;
-}
+void lnX();
+void calculaLnX();
+void derivadaLnX();
+void integralLnX();
+
+void umSobreX();
+void calculaUmSobreX();
+void derivadaUmSobreX();
+void integralUmSobreX();
+
+void senX();
+void calculaSenX();
+void derivadaSenx();
+void integralSenX();
+
+void cosX();
+void calculaCosX();
+void derivadaCosX();
+void integralCosX();
+
+
+void tgX();
+void calculaTgX();
+void derivadaTgX();
+void integralTgX();
+
+
+double grausParaRadianos(double d);
+double logbase(double a, double base);
+int validaTgRad(double tg);
+int validaTgGraus(double tg);
+int validaIntegralTg(float a, float b);
+void pauseAndClear();
+float funcaoRecebeValue(char value);
 
 int main()
 {
@@ -68,10 +82,19 @@ int main()
 
 void menuPrincipal()
 {
-int menuPrincipal;
-    do{
+    int menuPrincipal;
+
+    do {
         quebraLinha();
-        printf("\n        MENU\n\n");
+
+        printf("    ____           _              _ \n");
+        printf("   / ___|   __ _  | |   ___      (_)   ___  \n");
+        printf("  | |      / _` | | |  / __|     | |  / _ \\ \n");
+        printf("  | |___  | (_| | | | | (__   _  | | | (_) | \n");
+        printf("   \\____|  \\__,_| |_|  \\___| (_) |_|  \\___/  \n");
+
+
+        printf("\n\t\t\tMENU\n\n");
         printf("\n  Digite o numero da opcao e aperte enter para selecionar o calculo a ser feito\n\n");
         printf("\n1.	f(x) = k;");
         printf("\n2.	f(x) = x^k;");
@@ -87,10 +110,11 @@ int menuPrincipal;
         quebraLinha();
 
 
-        scanf("%d", &menuPrincipal);
+        scanf("%d", & menuPrincipal);
+        fflush(stdin);
 
-        switch(menuPrincipal)
-        {case 1:
+        switch (menuPrincipal) {
+            case 1:
                 funcaoConstante();
                 break;
 
@@ -99,35 +123,35 @@ int menuPrincipal;
                 break;
 
             case 3:
-                //CombinacaoSimples();
+                funcaoKElevadoAX();
                 break;
 
             case 4:
-                printf("\n *Saindo...* \n *Pressione qualquer tecla para sair!*\n");
+                eElevadoAX();
                 break;
 
             case 5:
-                printf("\n *Saindo...* \n *Pressione qualquer tecla para sair!*\n");
+                logXBaseK();
                 break;
 
             case 6:
-                printf("\n *Saindo...* \n *Pressione qualquer tecla para sair!*\n");
+                lnX();
                 break;
 
             case 7:
-                printf("\n *Saindo...* \n *Pressione qualquer tecla para sair!*\n");
+                umSobreX();
                 break;
 
             case 8:
-                printf("\n *Saindo...* \n *Pressione qualquer tecla para sair!*\n");
+                senX();
                 break;
 
             case 9:
-                printf("\n *Saindo...* \n *Pressione qualquer tecla para sair!*\n");
+                cosX();
                 break;
 
             case 10:
-                printf("\n *Saindo...* \n *Pressione qualquer tecla para sair!*\n");
+                tgX();
                 break;
 
             case 11:
@@ -138,31 +162,93 @@ int menuPrincipal;
                 printf("Opcao invalida \n");
                 break;
         }
-    }while(menuPrincipal !=11);
+    } while (menuPrincipal != 11);
 
     return 0;
 }
 
-void funcaoConstante()
-{int funcaoConstante;
+int menuSecundario()
+{
+    int escolha;
+    //printf("\n\t MENU\n\n");
+    printf("\n  Digite o numero da opcao e aperte enter para selecionar o calculo a ser feito\n\n");
+    printf("\n1.	FUNCAO");
+    printf("\n2.	DERIVADA");
+    printf("\n3.	INTEGRAL DEFINIDA");
+    printf("\n4.	VOLTAR AO MENU PRINCIPAL; \n\n");
+    quebraLinha();
 
-    do{
+    scanf("%d", & escolha);
 
+    fflush(stdin);
+
+    return escolha;
+}
+
+double validaInput()
+{
+    char buf[40];
+    char * endPt;
+    double x;
+    fflush(stdin); //usado para limpar buffer de input no caso quando usa scanf
+    fgets(buf, sizeof(buf), stdin);
+    buf[strlen(buf) - 1] = '\0';
+    x = strtod(buf, & endPt);
+    if (* endPt != '\0' || strlen(buf) == 0) {
+        printf("Numero invalido\n");
+        printf("Digite outro valor: ");
+        validaInput();
+    }
+    return x;
+}
+
+void pauseAndClear(){
+    system("PAUSE");
+    system("cls");
+}
+
+float funcaoRecebeValue(char value) {
+    printf("qual valor de %c deseja aplicar? ", value);
+    float v = validaInput();
+    printf("\n");
+    return v;
+}
+
+double grausParaRadianos(double d){
+    return (d * PI) / 180;
+}
+//NAO SEI OQ ERAM ESSAS MAS TBM NAO APAGUEI AHAHHA
+/*float funcaoIntegralDefinidaA()
+{
+  float a;
+  printf("qual valor do extremo a deseja aplicar? ");
+  scanf("%f", &a);
+  quebraLinha();
+  return a;
+}
+
+float funcaoIntegralDefinidaB()
+{
+  float b;
+  printf("qual valor do extremo b deseja aplicar? ");
+  scanf("%f", &b);
+  quebraLinha();
+  return b;
+}*/
+
+void funcaoConstante(){
+
+    int escolha;
+
+    do {
         quebraLinha();
-        printf("\n        MENU\n\n");
-        printf("\n  f(x) = k\n");
-        printf("\n  Digite o numero da opcao e aperte enter para selecionar o calculo a ser feito\n\n");
-        printf("\n1.	FUNCAO");
-        printf("\n2.	DERIVADA");
-        printf("\n3.	INTEGRAL DEFINIDA");
-        printf("\n4.	VOLTAR AO MENU PRINCIPAL; \n\n");
+        printf("\n\tf(x) = k\n");
+
+        escolha = menuSecundario();
         quebraLinha();
 
-        scanf("%d", &funcaoConstante);
-        quebraLinha();
-
-        switch(funcaoConstante)
-        {case 1:
+        switch (escolha) {
+            case 1:
                 calculaFuncaoConstante();
                 break;
 
@@ -171,7 +257,7 @@ void funcaoConstante()
                 break;
 
             case 3:
-                calculaIntegralDefinidaConstante();
+                calculaIntegralConstante();
                 break;
 
             case 4:
@@ -182,30 +268,24 @@ void funcaoConstante()
                 break;
         }
 
-    }while(funcaoConstante !=4);
+    } while (escolha != 4);
 
 }
 
-void funcaoXElevadoAK()
-{int funcaoXElevadoAK;
+void funcaoXElevadoAK(){
 
-    do{
+    int escolha;
+
+    do {
 
         quebraLinha();
-        printf("\n        MENU\n\n");
-        printf("\n  f(x) = x^k\n");
-        printf("\n  Digite o numero da opcao e aperte enter para selecionar o calculo a ser feito\n\n");
-        printf("\n1.	FUNCAO");
-        printf("\n2.	DERIVADA");
-        printf("\n3.	INTEGRAL DEFINIDA");
-        printf("\n4.	VOLTAR AO MENU PRINCIPAL; \n\n");
+        printf("\n\tf(x) = x^k\n");
+
+        escolha = menuSecundario();
         quebraLinha();
 
-        scanf("%d", &funcaoXElevadoAK);
-        quebraLinha();
-
-        switch(funcaoXElevadoAK)
-        {case 1:
+        switch (escolha) {
+            case 1:
                 calculaFuncaoXElevadoAK();
                 break;
 
@@ -214,7 +294,7 @@ void funcaoXElevadoAK()
                 break;
 
             case 3:
-                //calculaIntegralDefinidaXElevadoAK();
+                calculaIntegralXElevadoAK();;
                 break;
 
             case 4:
@@ -225,54 +305,677 @@ void funcaoXElevadoAK()
                 break;
         }
 
-    }while(funcaoXElevadoAK !=4);
+    } while (escolha != 4);
 
 }
 
+void funcaoKElevadoAX(){
+
+    int escolha;
+
+    do {
+
+        quebraLinha();
+        printf("\n\tf(x) = k^x\n");
+
+        escolha = menuSecundario();
+        quebraLinha();
+
+        switch (escolha) {
+            case 1:
+                calculaFuncaoKElevadoAX();
+                break;
+
+            case 2:
+                calculaDerivadaKElevadoAX();
+                break;
+
+            case 3:
+                calculaIntegralKElevadoAX();
+                break;
+
+            case 4:
+                break;
+
+            default:
+                printf("Opcao invalida \n");
+                break;
+        }
+
+    } while (escolha != 4);
+
+}
+
+void logXBaseK(){
+
+    int escolha;
+
+    do {
+
+        quebraLinha();
+        printf("\n\tf(x) = logk(x)");
+
+        escolha = menuSecundario();
+        quebraLinha();
+
+        switch (escolha) {
+            case 1:
+                calculaLogDeX();
+                break;
+
+            case 2:
+                calculaDerivadaLogX();
+                break;
+
+            case 3:
+                calculaIntegralLogX();
+                break;
+
+            case 4:
+                break;
+
+            default:
+                printf("Opcao invalida \n");
+                break;
+        }
+
+    } while (escolha != 4);
+
+}
+
+void eElevadoAX(){
+    int escolha = 0;
+
+    do {
+
+        quebraLinha();
+        printf("\n\tf(x) = e^x");
+
+        escolha = menuSecundario();
+        quebraLinha();
+
+        switch (escolha) {
+            case 1:
+            case 2:
+                calcula_e_ElevadoAX();
+                break;
+
+            case 3:
+                calculaIntegral_e_ElevadoAX();
+                break;
+
+            case 4:
+                break;
+
+            default:
+                printf("Opcao invalida \n");
+                break;
+        }
+
+    } while (escolha != 4);
+}
+
+void lnX(){
+    int escolha = 0;
+
+    do {
+
+        quebraLinha();
+        printf("\n\tf(x) = ln(x)");
+
+        escolha = menuSecundario();
+        quebraLinha();
+
+        switch (escolha) {
+            case 1:
+                calculaLnX();
+                break;
+            case 2:
+                derivadaLnX();
+                break;
+
+            case 3:
+                integralLnX();
+                break;
+
+            case 4:
+                break;
+
+            default:
+                printf("Opcao invalida \n");
+                break;
+        }
+
+    } while (escolha != 4);
+}
+
+void umSobreX(){
+    int escolha = 0;
+
+    do {
+
+        quebraLinha();
+        printf("\n\tf(x) = 1/x");
+
+        escolha = menuSecundario();
+        quebraLinha();
+
+        switch (escolha) {
+            case 1:
+                calculaUmSobreX();
+                break;
+            case 2:
+                derivadaUmSobreX();
+                break;
+
+            case 3:
+                integralUmSobreX();
+                break;
+
+            case 4:
+                break;
+
+            default:
+                printf("Opcao invalida \n");
+                break;
+        }
+
+    } while (escolha != 4);
+}
+
+void senX(){
+    int escolha = 0;
+
+    do {
+
+        quebraLinha();
+        printf("\n\tf(x) = sen(x)");
+
+        escolha = menuSecundario();
+        quebraLinha();
+
+        switch (escolha) {
+            case 1:
+                calculaSenX();
+                break;
+            case 2:
+                derivadaSenx();
+                break;
+
+            case 3:
+                integralSenX();
+                break;
+
+            case 4:
+                break;
+
+            default:
+                printf("Opcao invalida \n");
+                break;
+        }
+
+    } while (escolha != 4);
+}
+
+void cosX(){
+    int escolha = 0;
+
+    do {
+
+        quebraLinha();
+        printf("\n\tf(x) = cos(x)");
+
+        escolha = menuSecundario();
+        quebraLinha();
+
+        switch (escolha) {
+            case 1:
+                calculaCosX();
+                break;
+            case 2:
+                derivadaCosX();
+                break;
+
+            case 3:
+                integralCosX();
+                break;
+
+            case 4:
+                break;
+
+            default:
+                printf("Opcao invalida \n");
+                break;
+        }
+
+    } while (escolha != 4);
+}
+
+void tgX(){
+    int escolha = 0;
+
+    do {
+
+        quebraLinha();
+        printf("\n\tf(x) = tg(x)");
+
+        escolha = menuSecundario();
+        quebraLinha();
+
+        switch (escolha) {
+            case 1:
+                calculaTgX();
+                break;
+            case 2:
+                derivadaTgX();
+                break;
+
+            case 3:
+                integralTgX();
+                break;
+
+            case 4:
+                break;
+
+            default:
+                printf("Opcao invalida \n");
+                break;
+        }
+
+    } while (escolha != 4);
+}
 void quebraLinha()
 {
     printf("================================================================================ \n\n");
 }
 
+
+
+//FUNCAO CONSTANTE
 void calculaFuncaoConstante()
 {
-  double k = funcaoRecebeK();
-  double x = validaInput();
-  printf("f(%lf) = %lf \n", x, k);
-  quebraLinha();
+    double k = funcaoRecebeValue('k');
+    //double x = validaInput();
+    printf("f(x) = %lf \n", k);
+    pauseAndClear();
 }
 
 void calculaDerivadaConstante()
 {
-  float k = funcaoRecebeK();
-  float x = funcaoRecebeX();
-  printf(" f'(%f) = 0 \n", x);
-  quebraLinha();
+    float k = funcaoRecebeValue('k');
+    //float x = funcaoRecebeX();
+    printf(" f'(x) = 0 \n");
+    pauseAndClear();
 }
 
-void calculaIntegralDefinidaConstante()
-{
-  float k = funcaoRecebeK();
-  float x = funcaoRecebeX();
-  float a = funcaoIntegralDefinidaA();
-  float b = funcaoIntegralDefinidaB();
-  printf(" I(%f,%f) = por o resultado \n", a, b);
-  quebraLinha();
+void calculaIntegralConstante(){
+    float k = funcaoRecebeValue('k');
+    float a = funcaoRecebeValue('a');
+    float b = funcaoRecebeValue('b');
+
+    float result = (k*a)-(k*b);
+    printf(" I(%.2f,%.2f) = %2.f \n", a, b, result);
+    pauseAndClear();
 }
 
+//X ELEVADO A K
 void calculaFuncaoXElevadoAK()
 {
-  float k = funcaoRecebeK();
-  float x = funcaoRecebeX();
-  printf("f(%f) = %lf \n", x, pow(x, k));
-  quebraLinha();
+    float k = funcaoRecebeValue('k');
+    float x = funcaoRecebeValue('x');
+    printf("f(%f) = %lf \n", x, pow(x, k));
+    pauseAndClear();
 }
 
 void calculaDerivadaXElevadoAK()
 {
-  float k = funcaoRecebeK();
-  float x = funcaoRecebeX();
-  float xk;
-  printf(" f'(%f) = %lf \n", x, xk);
-  quebraLinha();
+    float k = funcaoRecebeValue('k');
+    float x = funcaoRecebeValue('x');
+    float result = 0;
+    result = k * (pow(x, k - 1));
+    printf(" f'(%f) = %lf \n", x, result);
+    pauseAndClear();
 }
+
+void calculaIntegralXElevadoAK(){
+    float k = funcaoRecebeValue('k');
+    if(k != -1){
+        float a = funcaoRecebeValue('a');
+        float b = funcaoRecebeValue('b');
+        printf("%f", k);
+        float result = ((pow(a, k+1)) / (k + 1)) - (((pow(b, k+1)) / (k + 1)));
+        printf(" I(%.2f,%.2f) = %.2f \n", a, b, result);
+        pauseAndClear();
+    } else {
+        printf("Valor de k invalido, tente novamente\n");
+        calculaIntegralXElevadoAK();
+    }
+}
+
+
+//K ELEVADO A X
+
+void calculaFuncaoKElevadoAX()
+{
+    float k = funcaoRecebeValue('k');
+    float x = funcaoRecebeValue('x');
+    printf("f(%f) = %lf \n", x, pow(k, x));
+    pauseAndClear();
+
+}
+
+void calculaDerivadaKElevadoAX()
+{
+    float k = funcaoRecebeValue('k');
+    if(k > 0){
+        float x = funcaoRecebeValue('x');
+        float result = 0;
+        printf("%f\n", pow(k, x));
+        printf("%f\n", log((double)k));
+        result = pow(k, x) * log((double)k);
+        printf(" f'(%f) = %lf \n", x, result);
+        pauseAndClear();
+    } else {
+        printf("Valor de k invalido, tente novamente\n");
+        calculaDerivadaKElevadoAX();
+    }
+}
+
+void calculaIntegralKElevadoAX(){
+    float k = funcaoRecebeValue('k');
+    if(k > 0 && k != 1){
+        float a = funcaoRecebeValue('a');
+        float b = funcaoRecebeValue('b');
+        printf("%f", k);
+        float result = ((pow(k,a)) / (log(k))) - ((pow(k,b)) / (log(k)));
+        printf(" I(%.2f,%.2f) = %.2f \n", a, b, result);
+        pauseAndClear();
+    } else {
+        printf("Valor de k invalido, tente novamente\n");
+        calculaIntegralKElevadoAX();
+    }
+}
+
+//LOG DE X
+double logbase(double a, double base)
+{
+    return log(a) / log(base);
+}
+
+void calculaLogDeX(){
+    double k = funcaoRecebeValue('k');
+    double x = funcaoRecebeValue('x');
+    if((k > 1) && (x >= 1)){
+       double result = 0;
+        result = logbase(x, k);
+        printf(" f(%f) = %lf \n", x, result);
+        pauseAndClear();
+    } else {
+        printf("Valores providos sao invalidos, tente novamente \n\n");
+        calculaLogDeX();
+    }
+}
+
+void calculaDerivadaLogX(){
+    double k = funcaoRecebeValue('k');
+    double x = funcaoRecebeValue('x');
+    if((k > 1) && (x != 0)){
+        double result = 0;
+        result = 1 / (x * log(k));
+        printf(" f'(%f) = %lf \n", x, result);
+        pauseAndClear();
+    } else {
+        printf("Valores providos sao invalidos, tente novamente \n\n");
+        calculaDerivadaLogX();
+    }
+}
+
+void calculaIntegralLogX(){
+    float k = funcaoRecebeValue('k');
+    float a = funcaoRecebeValue('a');
+    float b = funcaoRecebeValue('b');
+    if(k > 0 && k != 1 && a > 0 && b > 0){
+        double result = ((a * log(a) - a) / log(k)) - ((b * log(b) - b) / log(k));
+        printf(" I(%.2f,%.2f) = %f \n", a, b, result);
+        pauseAndClear();
+    } else {
+        printf("Valores invalidos, tente novamente");
+        calculaIntegralLogX();
+    }
+}
+
+//e ELEVADO A X
+
+void calcula_e_ElevadoAX(){
+    double x = funcaoRecebeValue('x');
+    double result = 0;
+    result = pow(E, x);
+    printf(" f(%f) = %lf \n", x, result);
+    pauseAndClear();
+}
+
+void calculaIntegral_e_ElevadoAX(){
+    float a = funcaoRecebeValue('a');
+    float b = funcaoRecebeValue('b');
+    double result = ((pow(E, a)) - (pow(E, b)));
+    printf(" I(%.2f,%.2f) = %f \n", a, b, result);
+    pauseAndClear();
+}
+
+//LN(X)
+
+void calculaLnX(){
+    double x = funcaoRecebeValue('x');
+    if(x > 0){
+        double result = 0;
+        result = log(x);
+        printf(" f(%f) = %lf \n", x, result);
+        pauseAndClear();
+    } else {
+         printf("Valor de x invalido, tente novamente \n\n");
+        calculaLnX();
+    }
+}
+
+void derivadaLnX(){
+    double x = funcaoRecebeValue('x');
+    if(x != 0){
+        double result = 0;
+        result = 1 / x;
+        printf(" f'(%f) = %lf \n", x, result);
+        pauseAndClear();
+    } else {
+        printf("Valor de x invalido, tente novamente \n\n");
+        derivadaLnX();
+    }
+}
+
+void integralLnX(){
+    float a = funcaoRecebeValue('a');
+    float b = funcaoRecebeValue('b');
+    if(a > 0 && b > 0){
+        double result = ((a*log(a)) - a) - ((b*log(b)) - b);
+        printf(" I(%.2f,%.2f) = %f \n", a, b, result);
+        pauseAndClear();
+    } else {
+        printf("Valores invalidos, tente novamente\n\n");
+        integralLnX();
+    }
+}
+
+//1/X
+
+void calculaUmSobreX(){
+    double x = funcaoRecebeValue('x');
+    if(x != 0){
+        double result = 0;
+        result = 1 / x;
+        printf(" f(%f) = %lf \n", x, result);
+        pauseAndClear();
+    } else {
+        printf("Valor de x invalido, tente novamente \n\n");
+        calculaUmSobreX();
+    }
+}
+
+void derivadaUmSobreX(){
+    double x = funcaoRecebeValue('x');
+    if(x != 0){
+        double result = 0;
+        result = -1 / (pow(x, 2));
+        printf(" f'(%f) = %lf \n", x, result);
+        pauseAndClear();
+    } else {
+        printf("Valor de x invalido, tente novamente \n\n");
+        derivadaUmSobreX();
+    }
+}
+
+void integralUmSobreX(){
+    float a = funcaoRecebeValue('a');
+    float b = funcaoRecebeValue('b');
+    if(a > 0 && b > 0){
+        double result = (log(a)) - (log(b));
+        printf(" I(%.2f,%.2f) = %f \n", a, b, result);
+        pauseAndClear();
+    } else {
+        printf("Valores invalidos, tente novamente\n\n");
+        integralUmSobreX();
+    }
+}
+
+//SEN(X)
+
+void calculaSenX(){
+    double x = funcaoRecebeValue('x');
+    double result = 0;
+    result = sin(grausParaRadianos(x));
+    printf(" f(%f) = %lf \n", x, result);
+    pauseAndClear();
+}
+
+void derivadaSenx(){
+    double x = funcaoRecebeValue('x');
+    double result = 0;
+    result = cos(x);
+    printf(" f(%f) = %lf \n", x, result);
+    pauseAndClear();
+}
+
+void integralSenX(){
+    float a = funcaoRecebeValue('a');
+    float b = funcaoRecebeValue('b');
+    double result = (-cos(a)) - (-cos(b));
+    printf(" I(%.2f,%.2f) = %f \n", a, b, result);
+    pauseAndClear();
+}
+
+//COS(X)
+
+void calculaCosX() {
+    double x = funcaoRecebeValue('x');
+    double result = 0;
+    result = cos(grausParaRadianos(x));
+    printf(" f(%f) = %lf \n", x, result);
+    pauseAndClear();
+}
+
+void derivadaCosX(){
+    double x = funcaoRecebeValue('x');
+    double result = 0;
+    result = -sin(x);
+    printf(" f'(%f) = %lf \n", x, result);
+    pauseAndClear();
+}
+
+void integralCosX(){
+    float a = funcaoRecebeValue('a');
+    float b = funcaoRecebeValue('b');
+    double result = (sin(a)) - (sin(b));
+    printf(" I(%.2f,%.2f) = %f \n", a, b, result);
+    pauseAndClear();
+}
+
+//TG(X)
+
+void calculaTgX(){
+    double x = funcaoRecebeValue('x');
+    if(validaTgGraus(x)){
+        double result = 0;
+        result = tan(grausParaRadianos(x));
+        printf(" f(%f) = %lf \n", x, result);
+        pauseAndClear();
+    } else {
+        printf("Valor de x invalido, tente novamente \n\n");
+        calculaTgX();
+    }
+}
+
+void derivadaTgX(){
+    double x = funcaoRecebeValue('x');
+    if(validaTgRad(x)){
+        double result = 0;
+        result = pow(1 / cos(x), 2);
+        printf(" f'(%f) = %lf \n", x, result);
+        pauseAndClear();
+    } else {
+        printf("Valor de x invalido, tente novamente \n\n");
+        derivadaTgX();
+    }
+}
+
+void integralTgX(){
+    float a = funcaoRecebeValue('a');
+    float b = funcaoRecebeValue('b');
+    if(validaIntegralTg(a, b)){
+        double result = (-log(fabs(cos(a)))) - (-log(fabs(cos(b))));
+        printf(" I(%.2f,%.2f) = %f \n", a, b, result);
+        pauseAndClear();
+    } else {
+        printf("Valores invalidos, tente novamente\n\n");
+        integralTgX();
+    }
+}
+
+int validaIntegralTg(float a, float b){
+    double maior = 0;
+    double menor = 0;
+    if(a > b){
+        maior = a;
+        menor = b;
+    } else if (b > a){
+        maior = b;
+        menor = a;
+    } else {
+        maior = a;
+        menor = b;
+    }
+    for(int i = 0; i <= maior; i++){
+        if((PI/2 + PI * (double)i) > menor && (PI/2 + PI * (double)i) < maior){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int validaTgRad(double tg){
+    for(int i = 0; i <= tg; i++){
+        if((PI/2 + PI * (double)i) == tg){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int validaTgGraus(double tg){
+    int q = tg /90;
+    if(q % 2 == 0){
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+
+
+
