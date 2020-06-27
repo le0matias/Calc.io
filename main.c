@@ -219,24 +219,6 @@ float funcaoRecebeValue(char value) {
 double grausParaRadianos(double d){
     return (d * PI) / 180;
 }
-//NAO SEI OQ ERAM ESSAS MAS TBM NAO APAGUEI AHAHHA
-/*float funcaoIntegralDefinidaA()
-{
-  float a;
-  printf("qual valor do extremo a deseja aplicar? ");
-  scanf("%f", &a);
-  quebraLinha();
-  return a;
-}
-
-float funcaoIntegralDefinidaB()
-{
-  float b;
-  printf("qual valor do extremo b deseja aplicar? ");
-  scanf("%f", &b);
-  quebraLinha();
-  return b;
-}*/
 
 void funcaoConstante(){
 
@@ -614,7 +596,6 @@ void calculaIntegralConstante(){
     float k = funcaoRecebeValue('k');
     float a = funcaoRecebeValue('a');
     float b = funcaoRecebeValue('b');
-
     float result = (k*a)-(k*b);
     printf(" I(%.2f,%.2f) = %2.f \n", a, b, result);
     pauseAndClear();
@@ -644,7 +625,6 @@ void calculaIntegralXElevadoAK(){
     if(k != -1){
         float a = funcaoRecebeValue('a');
         float b = funcaoRecebeValue('b');
-        printf("%f", k);
         float result = ((pow(a, k+1)) / (k + 1)) - (((pow(b, k+1)) / (k + 1)));
         printf(" I(%.2f,%.2f) = %.2f \n", a, b, result);
         pauseAndClear();
@@ -672,8 +652,6 @@ void calculaDerivadaKElevadoAX()
     if(k > 0){
         float x = funcaoRecebeValue('x');
         float result = 0;
-        printf("%f\n", pow(k, x));
-        printf("%f\n", log((double)k));
         result = pow(k, x) * log((double)k);
         printf(" f'(%f) = %lf \n", x, result);
         pauseAndClear();
@@ -688,7 +666,6 @@ void calculaIntegralKElevadoAX(){
     if(k > 0 && k != 1){
         float a = funcaoRecebeValue('a');
         float b = funcaoRecebeValue('b');
-        printf("%f", k);
         float result = ((pow(k,a)) / (log(k))) - ((pow(k,b)) / (log(k)));
         printf(" I(%.2f,%.2f) = %.2f \n", a, b, result);
         pauseAndClear();
@@ -977,7 +954,3 @@ int validaTgGraus(double tg){
         return 0;
     }
 }
-
-
-
-
