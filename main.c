@@ -187,18 +187,21 @@ int menuSecundario()
 
 double validaInput()
 {
+    int index = 0;
+    double x;
     char buf[40];
     char * endPt;
-    double x;
-    fflush(stdin); //usado para limpar buffer de input no caso quando usa scanf
-    fgets(buf, sizeof(buf), stdin);
-    buf[strlen(buf) - 1] = '\0';
-    x = strtod(buf, & endPt);
-    if (* endPt != '\0' || strlen(buf) == 0) {
-        printf("Numero invalido\n");
-        printf("Digite outro valor: ");
-        validaInput();
-    }
+    do{
+        if(index > 0){
+            printf("Numero invalido\n");
+            printf("Digite outro valor: ");
+        }
+        fflush(stdin); //usado para limpar buffer de input no caso quando usa scanf
+        fgets(buf, sizeof(buf), stdin);
+        buf[strlen(buf) - 1] = '\0';
+        x = strtod(buf, & endPt);
+        index++;
+    }while(* endPt != '\0' || strlen(buf) == 0);
     return x;
 }
 
@@ -208,9 +211,8 @@ void pauseAndClear(){
 }
 
 float funcaoRecebeValue(char value) {
-    printf("qual valor de %c deseja aplicar? ", value);
+    printf("Qual valor de %c deseja aplicar? ", value);
     float v = validaInput();
-    printf("\n");
     return v;
 }
 
